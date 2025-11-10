@@ -70,3 +70,9 @@ homebrew_casks:
   - grfnctl
   url:
     verified: github.com/ynqa/grfnctl
+  hooks:
+    post:
+      install: |
+        if OS.mac?
+          system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/grfnctl"]
+        end
